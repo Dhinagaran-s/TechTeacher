@@ -141,6 +141,8 @@ CKEDITOR_BASEPATH = '/static/ckeditor/ckeditor/'
 
 CKEDITOR_UPLOAD_PATH = '/media/'
 
+AUTHENTICATION_BACKENDS = ['tech.EmailBackEnd.EmailBackEnd']
+
 CKEDITOR_CONFIGS = {
     'default':{
         'toolbar':'full',

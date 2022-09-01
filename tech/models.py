@@ -11,6 +11,7 @@ from ckeditor.fields import RichTextField
 class CustomUser(AbstractUser):
     user_type_choices = ((1,'Admin'),(2,'Staff'),(3,'Student'))
     user_type = models.CharField(default=1, max_length=20, choices=user_type_choices)
+    # objects = models.Manager()
 
 
 
@@ -41,7 +42,7 @@ class StudentUser(models.Model):
     department = models.CharField(max_length=50, blank=True, default='')
     college = models.CharField(max_length=100, default='', blank=True)
     interest = models.CharField(max_length=30, default='', blank=True)
-    Country = models.CharField(max_length=20, default='India', blank=True)
+    country = models.CharField(max_length=20, default='India', blank=True)
     address = models.CharField(max_length=100, default='', blank=True)
     phone_no = models.IntegerField(default=0, blank=True)
     email = models.EmailField(blank=True)
@@ -59,6 +60,7 @@ class StudentUser(models.Model):
 class Posts(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=80, blank=False)
+    sub_title = models.CharField(max_length=50, blank=True, default='')
     body = RichTextField(default='')
     # body = models.TextField()
     created_by = models.ForeignKey(CustomUser, on_delete=models.PROTECT, default='', blank=True)

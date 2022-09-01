@@ -12,24 +12,24 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  {% comment %} <link href="{% static 'portfolio/assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'portfolio/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon"> {% endcomment %}
+  {% comment %} <link href="{% static 'basic/assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'basic/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon"> {% endcomment %}
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="{% static 'portfolio/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'portfolio/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <link href="{% static 'portfolio/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'portfolio/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
-  <link href="{% static 'portfolio/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
-  <link href="{% static 'portfolio/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
-  <link href="{% static 'portfolio/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+  <link href="{% static 'basic/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'basic/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'basic/assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'basic/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+  <link href="{% static 'basic/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+  <link href="{% static 'basic/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'basic/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{% static 'portfolio/assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'basic/assets/css/style.css' %}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.3.1
@@ -45,8 +45,8 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        {% comment %} <img src="{% static 'portfolio/assets/img/logo.png' %}" alt=""> {% endcomment %}
+      <a href="{% url 'home-page' %}" class="logo d-flex align-items-center">
+        {% comment %} <img src="{% static 'basic/assets/img/logo.png' %}" alt=""> {% endcomment %}
         <span class="d-none d-lg-block">TechTeacher</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -161,7 +161,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="{% static 'portfolio/assets/img/messages-1.jpg' %}" alt="" class="rounded-circle">
+                <img src="{% static 'basic/assets/img/messages-1.jpg' %}" alt="" class="rounded-circle">
                 <div>
                   <h4>Maria Hudson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -175,7 +175,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="{% static 'portfolio/assets/img/messages-2.jpg' %}" alt="" class="rounded-circle">
+                <img src="{% static 'basic/assets/img/messages-2.jpg' %}" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -189,7 +189,7 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="{% static 'portfolio/assets/img/messages-3.jpg' %}" alt="" class="rounded-circle">
+                <img src="{% static 'basic/assets/img/messages-3.jpg' %}" alt="" class="rounded-circle">
                 <div>
                   <h4>David Muldon</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -212,14 +212,14 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            {% comment %} <img src="{% static 'portfolio/assets/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle"> {% endcomment %}
+            {% comment %} <img src="{% static 'basic/assets/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle"> {% endcomment %}
             <span class="d-none d-md-block dropdown-toggle ps-2">{{ user.username }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{ user.username }}</h6>
-              <span>{{ user.student.interest }}</span>
+              <span>{{ user.studentuser.interest }}</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -256,7 +256,7 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="{% url 'logout-user' %}">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>
@@ -286,6 +286,13 @@
         <a class="nav-link collapsed" href="{% url 'home-page' %}">
           <i class="bi bi-grid"></i>
           <span>Home</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'post-create' %}">
+          <i class="bi bi-grid"></i>
+          <span>New Post</span>
         </a>
       </li>
 
@@ -333,14 +340,14 @@
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-              <img src="{{ user.student.profile_picture }}" alt="Profile" class="rounded-circle">
+              <img src="{{ user.studentuser.profile_picture }}" alt="Profile" class="rounded-circle">
               <h2>{{ user.username }}</h2>
               <h3>{{ user.username }}</h3>
               <div class="social-links mt-2">
-                <a href="{{ user.student.twitter_profile }}" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="{{ user.student.facebook_profile }}"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="{{ user.student.instagram_profile }}"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="{{ user.student.linkedin_profile }}"><i class="bi bi-linkedin"></i></a>
+                <a href="{{ user.studentuser.twitter_profile }}" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="{{ user.studentuser.facebook_profile }}"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="{{ user.studentuser.instagram_profile }}"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="{{ user.studentuser.linkedin_profile }}"><i class="bi bi-linkedin"></i></a>
               </div>
             </div>
           </div>
@@ -375,38 +382,48 @@
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
                   <h5 class="card-title">About</h5>
-                  <p class="small fst-italic">{{ user.student.about }}</p>
+                  <p class="small fst-italic">{{ user.studentuser.about }}</p>
 
                   <h5 class="card-title">Profile Details</h5>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">Full Name</div>
+                    <div class="col-lg-3 col-md-4 label ">First Name</div>
+                    <div class="col-lg-9 col-md-8">{{ user.first_name }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">Last Name</div>
+                    <div class="col-lg-9 col-md-8">{{ user.last_name }}</div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label ">User Name</div>
                     <div class="col-lg-9 col-md-8">{{ user.username }}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">College</div>
-                    <div class="col-lg-9 col-md-8">{{ user.student.college_name }}</div>
+                    <div class="col-lg-9 col-md-8">{{ user.studentuser.college }}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Interest</div>
-                    <div class="col-lg-9 col-md-8">{{ user.student.interest }}</div>
+                    <div class="col-lg-9 col-md-8">{{ user.studentuser.interest }}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Country</div>
-                    <div class="col-lg-9 col-md-8">{{ user.student.country }}</div>
+                    <div class="col-lg-9 col-md-8">{{ user.studentuser.country }}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
-                    <div class="col-lg-9 col-md-8">{{ user.student.address }}</div>
+                    <div class="col-lg-9 col-md-8">{{ user.studentuser.address }}</div>
                   </div>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
-                    <div class="col-lg-9 col-md-8">{{ user.student.phone_no }}</div>
+                    <div class="col-lg-9 col-md-8">{{ user.studentuser.phone_no }}</div>
                   </div>
 
                   <div class="row">
@@ -424,7 +441,7 @@
                     {% comment %} <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="{% static 'portfolio/assets/img/profile-img.jpg' %}" alt="Profile">
+                        <img src="{% static 'basic/assets/img/profile-img.jpg' %}" alt="Profile">
                         <div class="pt-2">
                           <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
                           <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
@@ -442,77 +459,77 @@
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px">{{ user.student.about }}</textarea>
+                        <textarea name="about" class="form-control" id="about" style="height: 100px">{{ user.studentuser.about }}</textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="company" class="col-md-4 col-lg-3 col-form-label">College</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="company" type="text" class="form-control" id="company" value="{{ user.student.college_name }}">
+                        <input name="company" type="text" class="form-control" id="company" value="{{ user.studentuser.college_name }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Job" class="col-md-4 col-lg-3 col-form-label">Interest</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="job" type="text" class="form-control" id="interest" value="{{ user.student.interest }}">
+                        <input name="job" type="text" class="form-control" id="interest" value="{{ user.studentuser.interest }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Country" class="col-md-4 col-lg-3 col-form-label">Country</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="country" type="text" class="form-control" id="Country" value="{{ user.student.country }}">
+                        <input name="country" type="text" class="form-control" id="Country" value="{{ user.studentuser.country }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="address" type="text" class="form-control" id="Address" value="{{ user.student.address }}">
+                        <input name="address" type="text" class="form-control" id="Address" value="{{ user.studentuser.address }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="phone" type="text" class="form-control" id="Phone" value="{{ user.student.phone_no }}">
+                        <input name="phone" type="text" class="form-control" id="Phone" value="{{ user.studentuser.phone_no }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="email" type="email" class="form-control" id="Email" value="{{ user.student.email }}">
+                        <input name="email" type="email" class="form-control" id="Email" value="{{ user.studentuser.email }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="twitter" type="text" class="form-control" id="Twitter" value="{{ user.student.twitter_profile }}">
+                        <input name="twitter" type="text" class="form-control" id="Twitter" value="{{ user.studentuser.twitter_profile }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="facebook" type="text" class="form-control" id="Facebook" value="{{ user.student.facebook_profile }}">
+                        <input name="facebook" type="text" class="form-control" id="Facebook" value="{{ user.studentuser.facebook_profile }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="instagram" type="text" class="form-control" id="Instagram" value="{{ user.student.instagram_profile }}">
+                        <input name="instagram" type="text" class="form-control" id="Instagram" value="{{ user.studentuser.instagram_profile }}">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="{{ user.student.linkedin_profile }}">
+                        <input name="linkedin" type="text" class="form-control" id="Linkedin" value="{{ user.studentuser.linkedin_profile }}">
                       </div>
                     </div>
 
@@ -625,17 +642,17 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="{% static 'portfolio/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
-  <script src="{% static 'portfolio/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'portfolio/assets/vendor/chart.js/chart.min.js' %}"></script>
-  <script src="{% static 'portfolio/assets/vendor/echarts/echarts.min.js' %}"></script>
-  <script src="{% static 'portfolio/assets/vendor/quill/quill.min.js' %}"></script>
-  <script src="{% static 'portfolio/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
-  <script src="{% static 'portfolio/assets/vendor/tinymce/tinymce.min.js' %}"></script>
-  <script src="{% static 'portfolio/assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'basic/assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+  <script src="{% static 'basic/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'basic/assets/vendor/chart.js/chart.min.js' %}"></script>
+  <script src="{% static 'basic/assets/vendor/echarts/echarts.min.js' %}"></script>
+  <script src="{% static 'basic/assets/vendor/quill/quill.min.js' %}"></script>
+  <script src="{% static 'basic/assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+  <script src="{% static 'basic/assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'basic/assets/vendor/php-email-form/validate.js' %}"></script>
 
   <!-- Template Main JS File -->
-  <script src="{% static 'portfolio/assets/js/main.js' %}"></script>
+  <script src="{% static 'basic/assets/js/main.js' %}"></script>
 
 </body>
 
