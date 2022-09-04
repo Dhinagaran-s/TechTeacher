@@ -116,6 +116,45 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
+
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'home-page' %}">
+          <i class="bi bi-grid"></i>
+          <span>Home</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'post-create-view' %}">
+          <i class="bi bi-grid"></i>
+          <span>New Post</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'self-post' %}">
+          <i class="bi bi-grid"></i>
+          <span>My Posts</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'student-list' %}">
+          <i class="bi bi-grid"></i>
+          <span>Students</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'staff-list' %}">
+          <i class="bi bi-grid"></i>
+          <span>Staffs</span>
+        </a>
+      </li>
+
+
+
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -123,7 +162,7 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Create Post</h1>
+      <h1>Update Post</h1>
     <section class="section">
       <div class="row">
 
@@ -134,15 +173,15 @@
               <h5 class="card-title"></h5>
 
               <!-- Vertical Form -->
-              <form class="row g-3" action="{% url 'post-create-save' %}" method="post">
+              <form class="row g-3" action="{% url 'post-update-save' id=post.id %}" method="post">
                 {% csrf_token %}
                 <div class="col-12">
                   <label for="Title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="Title" name="title">
+                  <input type="text" class="form-control" id="Title" name="title" value="{{ post.title }}">
                 </div>
                 <div class="col-12">
                   <label for="Sub Title" class="form-label">Sub Title</label>
-                  <input type="text" class="form-control" id="Sub Title" name="sub-title">
+                  <input type="text" class="form-control" id="Sub Title" name="sub-title" value="{{ post.sub_title }}">
                 </div>
 
                 <div class="col-lg">
@@ -153,6 +192,9 @@
           
                         <!-- TinyMCE Editor -->
                         <textarea class="tinymce-editor" id="content" name="content">
+                            {{ post.body }}
+
+                            
 
                         </textarea>
                         <!-- End TinyMCE Editor -->

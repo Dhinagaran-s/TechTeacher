@@ -12,8 +12,6 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  {% comment %} <link href="{% static 'basic/assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'basic/assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon"> {% endcomment %}
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -51,57 +49,53 @@
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-{% comment %} 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar --> {% endcomment %}
 
+    {% if user.is_authenticated %}
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
 
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            {% comment %} <img src="{% static 'basic/assets/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle"> {% endcomment %}
-            <span class="d-none d-md-block dropdown-toggle ps-2">{{ user.username }}</span>
+           <span class="d-none d-md-block dropdown-toggle ps-2">{{ user.username }}</span>
           </a><!-- End Profile Iamge Icon -->
+          
+            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                <li class="dropdown-header">
+                <h6>{{ user.username }}</h6>
+                <span>{{ user.student.interest }}</span>
+                </li>
+                <li>
+                <hr class="dropdown-divider">
+                </li>
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>{{ user.username }}</h6>
-              <span>{{ user.student.interest }}</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                <li>
+                <a class="dropdown-item d-flex align-items-center" href="{% url 'user-dashboard' username=user.username %}">
+                    <i class="bi bi-person"></i>
+                    <span>My Profile</span>
+                </a>
+                </li>
+                <li>
+                <hr class="dropdown-divider">
+                </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{% url 'user-dashboard' username=user.username %}">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+                </li>
 
-            </li>
-
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="{% url 'logout-user' %}">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+                <li>
+                <a class="dropdown-item d-flex align-items-center" href="{% url 'logout-user' %}">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Sign Out</span>
+                </a>
+                </li>
+            
 
           </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->
 
       </ul>
-    </nav><!-- End Icons Navigation -->
+    </nav>
+    {% endif %}
+    <!-- End Icons Navigation -->
 
   </header><!-- End Header -->
 
@@ -110,72 +104,88 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="{% url 'user-dashboard' username=user.username %}">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-    </ul>
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'user-dashboard' username=user.username %}">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'home-page' %}">
+            <i class="bi bi-grid"></i>
+            <span>Home</span>
+          </a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'post-create-view' %}">
+            <i class="bi bi-grid"></i>
+            <span>New Post</span>
+          </a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'admin-self-post-list' %}">
+            <i class="bi bi-grid"></i>
+            <span>My Posts</span>
+          </a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'admin-student-list' %}">
+            <i class="bi bi-grid"></i>
+            <span>Students</span>
+          </a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'admin-staff-list' %}">
+            <i class="bi bi-grid"></i>
+            <span>Staffs</span>
+          </a>
+        </li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'report-list' %}">
+            <i class="bi bi-grid"></i>
+            <span>Reports</span>
+          </a>
+        </li>
+  
+  
+      </ul>
 
   </aside><!-- End Sidebar-->
 
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Create Post</h1>
+      <h1>Report</h1>
     <section class="section">
       <div class="row">
-
-        <div class="col-lg">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-
-              <!-- Vertical Form -->
-              <form class="row g-3" action="{% url 'post-create-save' %}" method="post">
-                {% csrf_token %}
-                <div class="col-12">
-                  <label for="Title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="Title" name="title">
+        <div class="card mb-3">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{ data.file }}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{ data.title }}</h5>
+                  <p class="card-text">{{ data.description }}</p>
                 </div>
-                <div class="col-12">
-                  <label for="Sub Title" class="form-label">Sub Title</label>
-                  <input type="text" class="form-control" id="Sub Title" name="sub-title">
-                </div>
-
-                <div class="col-lg">
-
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Content</h5>
-          
-                        <!-- TinyMCE Editor -->
-                        <textarea class="tinymce-editor" id="content" name="content">
-
-                        </textarea>
-                        <!-- End TinyMCE Editor -->
-          
-                      </div>
-                    </div>
-          
-                  </div>
-
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  {% comment %} <button type="reset" class="btn btn-secondary">Reset</button> {% endcomment %}
-                </div>
-              </form><!-- Vertical Form -->
-
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-  </main><!-- End #main -->
+  </main>
+  
+  
+  
+  <!-- End #main -->
 
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">

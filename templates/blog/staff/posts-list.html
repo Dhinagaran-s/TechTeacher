@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,9 +6,11 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>TechTeacher</title>
+  <title>Profile</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
+  {% if user.is_authenticated %}
 
   <!-- Favicons -->
   {% comment %} <link href="{% static 'basic/assets/img/favicon.png' %}" rel="icon">
@@ -19,6 +20,7 @@
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
   <!-- Vendor CSS Files -->
   <link href="{% static 'basic/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   <link href="{% static 'basic/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
@@ -26,7 +28,8 @@
   <link href="{% static 'basic/assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
   <link href="{% static 'basic/assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
   <link href="{% static 'basic/assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
-  <link href="{% static 'basic/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+  <link href="{% static 'basic/assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">    
+  <link href="{%  static 'custom-basic/css/profile-card.css' %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="{% static 'basic/assets/css/style.css' %}" rel="stylesheet">
@@ -44,20 +47,15 @@
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content">
+    <div class="d-flex align-items-center justify-content-between">
       <a href="{% url 'home-page' %}" class="logo d-flex align-items-center">
         {% comment %} <img src="{% static 'basic/assets/img/logo.png' %}" alt=""> {% endcomment %}
         <span class="d-none d-lg-block">TechTeacher</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
-{% comment %} 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar --> {% endcomment %}
+
+
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -72,7 +70,7 @@
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
               <h6>{{ user.username }}</h6>
-              <span>{{ user.student.interest }}</span>
+              <span>{{ user.adminuser.interest }}</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -82,12 +80,12 @@
               <a class="dropdown-item d-flex align-items-center" href="{% url 'user-dashboard' username=user.username %}">
                 <i class="bi bi-person"></i>
                 <span>My Profile</span>
+
               </a>
             </li>
+
             <li>
               <hr class="dropdown-divider">
-            </li>
-
             </li>
 
             <li>
@@ -116,6 +114,43 @@
           <span>Dashboard</span>
         </a>
       </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'home-page' %}">
+          <i class="bi bi-grid"></i>
+          <span>Home</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'post-create-view' %}">
+          <i class="bi bi-grid"></i>
+          <span>New Post</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'staff-self-post-list' %}">
+          <i class="bi bi-grid"></i>
+          <span>My Posts</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'staff-student-list' %}">
+          <i class="bi bi-grid"></i>
+          <span>Students</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'staff-staff-list' %}">
+          <i class="bi bi-grid"></i>
+          <span>Staffs</span>
+        </a>
+      </li>
+
+
     </ul>
 
   </aside><!-- End Sidebar-->
@@ -123,58 +158,48 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Create Post</h1>
-    <section class="section">
-      <div class="row">
+      <h1>My Posts</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="{% url 'user-dashboard' username=user.username %}">Staff</a></li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
 
-        <div class="col-lg">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title"></h5>
-
-              <!-- Vertical Form -->
-              <form class="row g-3" action="{% url 'post-create-save' %}" method="post">
-                {% csrf_token %}
-                <div class="col-12">
-                  <label for="Title" class="form-label">Title</label>
-                  <input type="text" class="form-control" id="Title" name="title">
+<div class="content">
+        <!-- end row -->
+        <div class="row">
+          {% for post in data %}
+            <!-- Card with header and footer -->
+            <div class="card">
+                <div class="card-header">{{ post.title }}</div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.sub_title }}</h5>
+                    {{ post.body | truncatechars:30 | safe  }}
                 </div>
-                <div class="col-12">
-                  <label for="Sub Title" class="form-label">Sub Title</label>
-                  <input type="text" class="form-control" id="Sub Title" name="sub-title">
+                <div class="card-footer">
+                    {{ post.created_at }}
+                  <a href="{% url 'post-detail-view' id=post.id %}" ><button type="button" class="btn btn-outline-success">View</button></a>
+                  <a href="{% url 'post-update-view' id=post.id %}" ><button type="button" class="btn btn-outline-success">Edit</button></a>
                 </div>
+                </div><!-- End Card with header and footer -->
 
-                <div class="col-lg">
+          {% endfor %}
+            <!-- end col -->
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- container -->
+</div>
 
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">Content</h5>
-          
-                        <!-- TinyMCE Editor -->
-                        <textarea class="tinymce-editor" id="content" name="content">
 
-                        </textarea>
-                        <!-- End TinyMCE Editor -->
-          
-                      </div>
-                    </div>
-          
-                  </div>
 
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  {% comment %} <button type="reset" class="btn btn-secondary">Reset</button> {% endcomment %}
-                </div>
-              </form><!-- Vertical Form -->
 
-            </div>
-          </div>
+
 
         </div>
-      </div>
     </section>
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -205,7 +230,16 @@
 
   <!-- Template Main JS File -->
   <script src="{% static 'basic/assets/js/main.js' %}"></script>
+  
+  {% else%}
+    
+    <script type="text/javascript">
+    window.location="{% url 'login-page' %}";
+    </script>
+  {% endif %}
+
 
 </body>
 
 </html>
+

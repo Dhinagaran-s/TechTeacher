@@ -27,9 +27,11 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'home-page' %}">Home</a></li>
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'post-create' %}">New Post</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'report-page' %}">Report</a></li>
                         {% if user.is_authenticated %}
-                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'user-profile' username=user.username %}">Profile</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'post-create-view' %}">New Post</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'self-post' %}">My Post</a></li>
+                            <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'user-dashboard' username=user.username %}">My Profile</a></li>
                             <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'logout-user' %}">Logout</a></li>
                         {% endif %}
                         {% if not user.is_authenticated %}
@@ -67,7 +69,14 @@
                             </a>
                             <p class="post-meta">
                                 Posted by
-                                <a href="{% url 'user-public-profile' username=post.created_by.username %}">{{ post.created_by.username }}</a>
+                                {% if post.created_by.user_type == '1' %}
+                                    <a href="{% url 'admin-public-profile' username=post.created_by.username %}">
+                                {% elif post.created_by.user_type == '2' %}
+                                    <a href="{% url 'staff-public-profile' username=post.created_by.username %}">
+                                {% elif post.created_by.user_type == '3' %}
+                                    <a href="{% url 'student-public-profile' username=post.created_by.username %}">
+                                {% endif %}
+                                        {{ post.created_by.username }}</a>
                                 on {{ post.created_at }}
                             </p>
                         </div>

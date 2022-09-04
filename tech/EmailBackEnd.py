@@ -12,7 +12,6 @@ class EmailBackEnd(ModelBackend):
             return None
         
         else:
-            print('entering else block')
             if user.check_password(password):
                 return user
         return None
