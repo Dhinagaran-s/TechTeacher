@@ -26,7 +26,7 @@ class LoginCheckMiddleware(MiddlewareMixin):
                 if modulename in ['tech.UserPermission.student', 'tech.views', 'django.views.static']:
                     pass
         else:
-            if modulename in ['tech.views', 'django.views.static']:
+            if modulename in ['tech.views', 'django.views.static', 'tech.api.views']:
                 pass
             else:
                 return redirect('home-page')

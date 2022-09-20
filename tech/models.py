@@ -25,6 +25,9 @@ class AdminUser(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
+    def __str__(self):
+        return self.admin.username
+
 
 class StaffUser(models.Model):
     id = models.AutoField(primary_key=True)
@@ -55,6 +58,8 @@ class StaffUser(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
+    def __str__(self):
+        return self.admin.username
 
 
 class StudentUser(models.Model):
@@ -86,6 +91,8 @@ class StudentUser(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
+    def __str__(self):
+        return self.admin.username
 
 
 class Posts(models.Model):
