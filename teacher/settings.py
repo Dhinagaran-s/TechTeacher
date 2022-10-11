@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tech',
     'rest_framework',
+    'corsheaders',
     'ckeditor',
     'ckeditor_uploader',
 ]
@@ -48,6 +49,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -153,3 +155,9 @@ CKEDITOR_CONFIGS = {
         'width':'100%'
     }
 }
+
+CROSS_ALL0W_ALL_ORIGINS = True
+
+
+
+
