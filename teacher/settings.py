@@ -158,6 +158,19 @@ CKEDITOR_CONFIGS = {
 
 CROSS_ALL0W_ALL_ORIGINS = True
 
+CROSS_ALLOW_METHODS = [
+    "GET",
+    "PUT",
+]
 
-
-
+CROSS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "orgin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
