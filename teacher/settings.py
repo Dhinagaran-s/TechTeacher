@@ -156,14 +156,14 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-CROSS_ALL0W_ALL_ORIGINS = True
+CORS_ALL0W_ALL_ORIGINS = True
 
-CROSS_ALLOW_METHODS = [
+CORS_ALLOW_METHODS = [
     "GET",
     "PUT",
 ]
 
-CROSS_ALLOW_HEADERS = [
+CORS_ALLOW_HEADERS = [
     "accept",
     "accept-encoding",
     "authorization",
