@@ -156,7 +156,14 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-CORS_ALL0W_ALL_ORIGINS = True
+
+
+CORS_ORIGIN_WHITELIST = [
+    'https://techteacher.vercel.app',
+    'http://localhost:3000',
+]
+
+
 
 CORS_ALLOW_METHODS = [
     "GET",
@@ -173,4 +180,4 @@ CORS_ALLOW_HEADERS = [
     "user-agent",
     "x-csrftoken",
     "x-requested-with",
-]
+ ]
